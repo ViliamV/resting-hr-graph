@@ -9,65 +9,71 @@ app = dash.Dash()
 
 x, y, z = read_data()
 
-my_css_url = 'https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css'
-app.css.append_css({
-    "external_url": my_css_url
-})
+my_css_url = "https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css"
+app.css.append_css({"external_url": my_css_url})
 
-app.layout = html.Div(children=[
-    html.Div([
-        html.Div([
-            html.Div([
-                html.H1('Resting Heart Rate', className='title'),
-            ], className='container')
-        ], className='hero-body')
-    ], className='hero is-danger'),
-    html.Div([
-        dcc.Graph(
-            id='graph',
-            figure=go.Figure(
-                data=[go.Scatter(
-                    x=x,
-                    y=y,
-                    line=dict(shape='linear', color='#FF6382'),
-                    fillcolor='#FF95AA',
-                    hoverinfo='x+y',
-                    hoverlabel=dict(bgcolor='#333',font=dict(size=18)),
-                    fill='tozeroy',
-                    name='HR'
-                    # ),
-                    # go.Scatter(
-                    #     x=x,
-                    #     y=z,
-                    #     hoverinfo='y',
-                    #     hoverlabel=dict(bgcolor='#333',font=dict(size=18)),
-                    #     line=dict(shape="linear", color="#b32945"),
-                    #     name='Average'
-                        )],
-                layout=dict(
-                    autosize=True,
-                    margin=go.Margin(
-                        l=35,
-                        r=20,
-                        b=0,
-                        t=20,
-                        pad=4
-                    ),
-                    yaxis=dict(range=[30,60]),
-                    xaxis=dict(
-                        rangeslider=dict(),
-                        type='date',
-                        showspikes=True,
-                        spikemode='toaxis',
-                        spikethickness=2,
-                        spikedash='solid'
-                    )
+app.layout = html.Div(
+    children=[
+        html.Div(
+            [
+                html.Div(
+                    [
+                        html.Div(
+                            [html.H1("Resting Heart Rate", className="title")],
+                            className="container",
+                        )
+                    ],
+                    className="hero-body",
                 )
-            ),
-            style=dict(height='78vh')
-        )
-    ], className='section')#,
-])
+            ],
+            className="hero is-danger",
+        ),
+        html.Div(
+            [
+                dcc.Graph(
+                    id="graph",
+                    figure=go.Figure(
+                        data=[
+                            go.Scatter(
+                                x=x,
+                                y=y,
+                                line=dict(shape="linear", color="#FF6382"),
+                                fillcolor="#FF95AA",
+                                hoverinfo="x+y",
+                                hoverlabel=dict(bgcolor="#333", font=dict(size=18)),
+                                fill="tozeroy",
+                                name="HR"
+                                # ),
+                                # go.Scatter(
+                                #     x=x,
+                                #     y=z,
+                                #     hoverinfo='y',
+                                #     hoverlabel=dict(bgcolor='#333',font=dict(size=18)),
+                                #     line=dict(shape="linear", color="#b32945"),
+                                #     name='Average'
+                            )
+                        ],
+                        layout=dict(
+                            autosize=True,
+                            margin=go.Margin(l=35, r=20, b=0, t=20, pad=4),
+                            yaxis=dict(range=[30, 60]),
+                            xaxis=dict(
+                                rangeslider=dict(),
+                                type="date",
+                                showspikes=True,
+                                spikemode="toaxis",
+                                spikethickness=2,
+                                spikedash="solid",
+                            ),
+                        ),
+                    ),
+                    style=dict(height="78vh"),
+                )
+            ],
+            className="section",
+        ),  # ,
+    ]
+)
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run_server(debug=True)
