@@ -7,7 +7,7 @@ from reader import read_data
 
 app = dash.Dash()
 
-x, y = read_data()
+x, y, z = read_data()
 
 my_css_url = 'https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css'
 app.css.append_css({
@@ -35,7 +35,15 @@ app.layout = html.Div(children=[
                     hoverlabel=dict(bgcolor='#333',font=dict(size=18)),
                     fill='tozeroy',
                     name='HR'
-                )],
+                    # ),
+                    # go.Scatter(
+                    #     x=x,
+                    #     y=z,
+                    #     hoverinfo='y',
+                    #     hoverlabel=dict(bgcolor='#333',font=dict(size=18)),
+                    #     line=dict(shape="linear", color="#b32945"),
+                    #     name='Average'
+                        )],
                 layout=dict(
                     autosize=True,
                     margin=go.Margin(
