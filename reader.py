@@ -5,6 +5,7 @@ from dateutil.parser import parse
 import itertools
 from collections import deque
 
+AVG=14
 
 def moving_average(data, window):
     for i in range(window - 1):
@@ -16,7 +17,7 @@ def moving_average(data, window):
     for elem in it:
         s += elem - d.popleft()
         d.append(elem)
-        yield s / window
+        yield round(s / window, 1)
 
 
 def read_data():
@@ -45,4 +46,6 @@ def read_data():
     for c in sorted(cleaned_data, key=itemgetter(0)):
         x.append(c[0])
         y.append(c[1])
-    return x, y, list(moving_average(y, 10))
+    avg_x = x[0::AVG] + [x[-1]]
+    avg_y = list(moving_average(y, AVG))[0::AVG] + [y[-1]]
+    return x, y, avg_x, avg_y
